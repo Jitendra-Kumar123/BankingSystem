@@ -38,7 +38,7 @@ const sendEmail = async (to, subject, text, html) => {
   }
 };
 
-async function sendUserRegistrationEmail(userName, email){
+async function sendUserRegistrationEmail(userEmail, name){
     const subject = "Welcome to BankingWorkSystem";
 
     const text = `
@@ -85,5 +85,142 @@ async function sendUserRegistrationEmail(userName, email){
     await sendEmail(userEmail, subject, text, html);                  
 }
 
-module.exports = sendUserRegistrationEmail;
+async function sendTransactionEmail(userEmail, name, amount, toAccount) {
+  const subject = "Transaction Successful - BankingWorkSystem";
+
+  const text = `
+Dear ${name},
+
+Your transaction has been processed successfully.
+
+Transaction Details:
+Amount: ₹${amount}
+Recipient Account: ${toAccount}
+Status: Successful
+
+Thank you for using BankingWorkSystem.
+
+Regards,
+BankingWorkSystem Team
+`;
+
+  const html = `
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px;">
+  <div style="background:#16a34a; padding:15px; text-align:center; color:white;">
+    <h2>Transaction Successful</h2>
+  </div>
+
+  <p>Dear <strong>${name}</strong>,</p>
+
+  <p>Your transaction has been completed successfully.</p>
+
+  <table style="width:100%; border-collapse: collapse; margin-top:20px;">
+    <tr>
+      <td style="padding:10px; border:1px solid #ddd;"><strong>Amount</strong></td>
+      <td style="padding:10px; border:1px solid #ddd;">₹${amount}</td>
+    </tr>
+    <tr>
+      <td style="padding:10px; border:1px solid #ddd;"><strong>Recipient Account</strong></td>
+      <td style="padding:10px; border:1px solid #ddd;">${toAccount}</td>
+    </tr>
+    <tr>
+      <td style="padding:10px; border:1px solid #ddd;"><strong>Status</strong></td>
+      <td style="padding:10px; border:1px solid #ddd; color:green;"><strong>SUCCESSFUL</strong></td>
+    </tr>
+  </table>
+
+  <p style="margin-top:20px;">
+    Thank you for using BankingWorkSystem.
+  </p>
+
+  <hr />
+
+  <p style="font-size:14px; color:#666;">
+    Regards,<br />
+    <strong>BankingWorkSystem Team</strong>
+  </p>
+</div>
+`;
+
+  return sendEmail(userEmail, subject, text, html);
+}
+
+async function sendTransactionFailureEmail(userEmail, name, amount, toAccount) {
+  const subject = "Transaction Failed - BankingWorkSystem";
+
+  const text = `
+Dear ${name},
+
+We were unable to process your transaction.
+
+Transaction Details:
+Amount: ₹${amount}
+Recipient Account: ${toAccount}
+Status: Failed
+
+Possible reasons:
+- Insufficient balance
+- Invalid recipient account
+- Temporary server issue
+
+Please try again later.
+
+Regards,
+BankingWorkSystem Team
+`;
+
+  const html = `
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px;">
+  <div style="background:#dc2626; padding:15px; text-align:center; color:white;">
+    <h2>Transaction Failed</h2>
+  </div>
+
+  <p>Dear <strong>${name}</strong>,</p>
+
+  <p>Unfortunately, we could not complete your transaction.</p>
+
+  <table style="width:100%; border-collapse: collapse; margin-top:20px;">
+    <tr>
+      <td style="padding:10px; border:1px solid #ddd;"><strong>Amount</strong></td>
+      <td style="padding:10px; border:1px solid #ddd;">₹${amount}</td>
+    </tr>
+    <tr>
+      <td style="padding:10px; border:1px solid #ddd;"><strong>Recipient Account</strong></td>
+      <td style="padding:10px; border:1px solid #ddd;">${toAccount}</td>
+    </tr>
+    <tr>
+      <td style="padding:10px; border:1px solid #ddd;"><strong>Status</strong></td>
+      <td style="padding:10px; border:1px solid #ddd; color:red;"><strong>FAILED</strong></td>
+    </tr>
+  </table>
+
+  <div style="background:#fef2f2; border-left:4px solid #dc2626; padding:12px; margin-top:20px;">
+    <strong>Possible Reasons:</strong>
+    <ul>
+      <li>Insufficient account balance</li>
+      <li>Invalid recipient account</li>
+      <li>Temporary system issue</li>
+    </ul>
+  </div>
+
+  <p>Please verify the details and try again.</p>
+
+  <hr />
+
+  <p style="font-size:14px; color:#666;">
+    Regards,<br />
+    <strong>BankingWorkSystem Team</strong>
+  </p>
+</div>
+`;
+
+  return sendEmail(userEmail, subject, text, html);
+}
+
+module.exports ={ 
+  sendEmail,
+  sendUserRegistrationEmail,
+  sendTransactionEmail,
+  sendTransactionFailureEmail,
+};
 module.exports = transporter;
