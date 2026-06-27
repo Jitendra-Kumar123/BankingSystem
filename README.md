@@ -156,4 +156,4 @@ A `frontend/` folder exists, but its source was not available during analysis. I
 Add your license here.
 
 for any query/ discussion about any project contact me here - 
-mail - jitendra0202006@gmail.com / jitendrakumar.dev.cs@gmail.com
+mail - [jitendra0202006@gmail.com / jitendrakumar.dev.cs@gmail.com]
