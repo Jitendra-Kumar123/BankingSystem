@@ -20,7 +20,6 @@ A secure banking-style backend service built with **Node.js + Express + MongoDB 
 - Backend: Node.js, Express, Mongoose, JWT, Cookie Parser, Nodemailer
 - Database: MongoDB
 
-
 ## Project Structure (Backend)
 
 - `backend/server.js` - server entry
@@ -122,6 +121,7 @@ Required variables (inferred from code):
 - `JWT_SECRET` - secret for signing/verifying JWT
 
 Email (Gmail OAuth2 via Nodemailer):
+
 - `GOOGLE_USER`
 - `GOOGLE_CLIENT_ID`
 - `GOOGLE_CLIENT_SECRET`
@@ -153,5 +153,6 @@ A `frontend/` folder exists, but its source was not available during analysis. I
 
 ## License
 
-for any query/ discussion about any project contact me here - 
+for any query/ discussion about any project contact me here -
+
 mail - [jitendra0202006@gmail.com / jitendrakumar.dev.cs@gmail.com]
